@@ -1,0 +1,46 @@
+
+What is required by dxf2papercraft?
+-----------------------------------
+
+The executable binary version of dxf2papercraft have been linked
+statically to omit problems with the dime library. If you want to
+compile dxf2papercraft from the sources you need to install the dime
+library.
+
+On Ubuntu or Debian to following should do:
+
+sudo apt-get install libdime libdime-dev
+
+For other distirbutions, please use your respective packet
+manager. You can also compile the included version of dime from
+scratch:
+
+tar xzf dime_0.20091127.tar.gz
+cd dime
+./configure --enable-static
+make
+sudo make install
+
+How to install dxf2papercraft?
+------------------------------
+
+If libdime has been installed as described above you only need to
+compile the project with
+
+make
+
+and run the application from the current directory (no installation
+required).
+
+As a first test you may want to convert one of the examples
+
+./dxf2papercraft ./examples/mycubes.dxf ./testsheet.dxf
+
+Open the resulting cutout-sheet, e.g., with
+
+ooffice testsheet.dxf
+
+if you have OpenOffice installed. You can also use qcad
+<www.ribbonsoft.com> (rather use your packet manager) or other
+applications which can import 2D DXF files.
+
