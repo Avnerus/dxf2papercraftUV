@@ -30,7 +30,7 @@ public:
   bool     writeToDXF(ofstream*, Json::Value &, VektorR2, VektorR2, int, VektorR2, int, bool, bool);  
   void     writeAdherent(ofstream*, double, int&);
   void     printProjection(int);
-  void     print3DVertices(int);
+  void     get3DVertices(int, Json::Value &);
   VektorR2 calcNormal(int);
   VektorR3 calc3DNormal();
 

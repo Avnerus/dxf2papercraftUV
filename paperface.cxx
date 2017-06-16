@@ -348,7 +348,7 @@ void paperFace::generateConnectedFaceGraph(int no_faces)
 	if(neighbor[edge_index] == NULL) { // we did not process this edge before
 
 	  if(sharesThisEdge(faceArray[i], edge_index, neighbor_edge_index, true) == true) {
-	    // cout << "graph: face.ID=" << this << " connected to face: " << &(faceArray[i]) << endl;
+	    //cout << "graph: face.ID=" << this << " connected to face: " << &(faceArray[i]) << "In edge index " << edge_index << endl;
 	    neighbor[edge_index] = &(faceArray[i]);
 	    faceArray[i].generateConnectedFaceGraph(no_faces);
 	  } // if       
@@ -356,7 +356,6 @@ void paperFace::generateConnectedFaceGraph(int no_faces)
       } // for
     } // if
   } // for
-
 } // paperFace::generateConnectedFaceGraph
 
 bool paperFace::intersectsOtherFace(int no_faces)
@@ -427,11 +426,8 @@ bool paperFace::writeToDXF(ofstream* DXFFile, Json::Value & faces_json, VektorR2
   Json::Value face_json;
   face_json["id"] = ID;
   Json::Value vtx(Json::arrayValue);
-  for (int i = 0; i < MAX_POINTS_PER_FACE; i++) {
-      if (point[i] != -1) {
-          vtx.append(Json::Value((int)point[i]));
-      }
-  }
+  get3DVertices(0, vtx);
+
   face_json["vtx"] = vtx;
   VektorR3 normalVec = calc3DNormal();
   normalVec.Normalize();
@@ -605,6 +601,16 @@ bool paperFace::writeToDXF(ofstream* DXFFile, Json::Value & faces_json, VektorR2
   face_json["uvs"] = uvs;
     
   (*DXFFile) << "  0\nSEQEND" << endl;
+
+  // Neighbors
+  for  ( int i = 0; i < MAX_POINTS_PER_FACE; i++ ) {
+    paperFace* current_neighbor = neighbor[i];
+    if (current_neighbor) {
+        std::cout << "Neighbor!" << current_neighbor->ID << std::endl;
+    }
+  }
+
+
 
   faces_json.append(face_json);
 
@@ -857,14 +863,21 @@ void paperFace::plotProjection()
   } // for      
 } // paperFace::plotProjection
 
-void paperFace::print3DVertices(int start_with_index)
+void paperFace::get3DVertices(int start_with_index, Json::Value &vertices_json)
 {
   for(int i = start_with_index; i < no_points+start_with_index; i++) {
 
     double dist = (pointArray[point[index_save(i)]] - pointArray[point[index_save(i-1)]]).Norm2();
 
-    cout << "vertex #" << i << ": (" << setprecision(5) << fixed << pointArray[point[index_save(i)]][0] << "," << pointArray[point[index_save(i)]][1] << "," << pointArray[point[index_save(i)]][2] << ")" << " [" << point[index_save(i)] << "]" << " dist to prev.: " << dist << endl;
+    Json::Value vertex(Json::arrayValue);
+    vertex.append(Json::Value(pointArray[point[index_save(i)]][0]));
+    vertex.append(Json::Value(pointArray[point[index_save(i)]][1]));
+    vertex.append(Json::Value(pointArray[point[index_save(i)]][2]));
+    vertices_json.append(vertex);
+    
+    //cout << "vertex #" << i << ": (" << setprecision(5) << fixed << pointArray[point[index_save(i)]][0] << "," << pointArray[point[index_save(i)]][1] << "," << pointArray[point[index_save(i)]][2] << ")" << " [" << point[index_save(i)] << "]" << " dist to prev.: " << dist << endl;
    
+
   } // for
   
 } // paperFace::print3DVertices
@@ -1117,7 +1130,7 @@ void paperFace::swapVertexData(int pi, int pj)
 } // paperFace::swapVertexData
 
 void paperFace::swapEdgeData(int pi, int pj)
-{
+{ 
   int i = index_save(pi);
   int j = index_save(pj);
 

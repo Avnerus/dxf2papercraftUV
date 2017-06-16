@@ -491,11 +491,9 @@ static void convertModel(faceset_data *data, const int colnum, const char* const
     faceArray[i].ID = i;
   } // for
 
-  /*
   if(facecnt > 0) {
    faceArray[0].generateConnectedFaceGraph(facecnt);
   } // if
-  */
   // generate papercraft model
 
   ofstream* DXFFile = openDXFFile(filename);
@@ -525,7 +523,7 @@ static void convertModel(faceset_data *data, const int colnum, const char* const
       for(int edge = 0; edge < faceArray[i].no_points; edge++) {
 	faceArray[i].adherent_connected[edge] = false;
 	faceArray[i].adherent_ID[edge] = -1;
-	faceArray[i].neighbor[edge] = NULL;
+	//faceArray[i].neighbor[edge] = NULL;
       } // for
       
       faceArray[i].drawn = false;
