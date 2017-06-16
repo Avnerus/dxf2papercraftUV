@@ -612,7 +612,7 @@ bool paperFace::writeToDXF(ofstream* DXFFile, Json::Value & faces_json, VektorR2
         neighbor_json["id"] = current_neighbor->ID;
         Json::Value vertex_indexes_json(Json::arrayValue);
         vertex_indexes_json.append(i);
-        vertex_indexes_json.append(i+1);
+        vertex_indexes_json.append(i == 3 ? 0 : i + 1);
         neighbor_json["vertexIndex"] = vertex_indexes_json;
         neighbors_json.append(neighbor_json);
     }
