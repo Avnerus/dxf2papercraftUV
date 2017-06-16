@@ -602,13 +602,23 @@ bool paperFace::writeToDXF(ofstream* DXFFile, Json::Value & faces_json, VektorR2
     
   (*DXFFile) << "  0\nSEQEND" << endl;
 
+  Json::Value neighbors_json(Json::arrayValue);
+
   // Neighbors
   for  ( int i = 0; i < MAX_POINTS_PER_FACE; i++ ) {
     paperFace* current_neighbor = neighbor[i];
     if (current_neighbor) {
-        std::cout << "Neighbor!" << current_neighbor->ID << std::endl;
+        Json::Value neighbor_json;
+        neighbor_json["id"] = current_neighbor->ID;
+        Json::Value vertex_indexes_json(Json::arrayValue);
+        vertex_indexes_json.append(i);
+        vertex_indexes_json.append(i+1);
+        neighbor_json["vertexIndex"] = vertex_indexes_json;
+        neighbors_json.append(neighbor_json);
     }
   }
+
+  face_json["neighbors"] = neighbors_json;
 
 
 
