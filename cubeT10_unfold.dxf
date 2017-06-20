@@ -1,0 +1,188 @@
+  0
+SECTION
+  2
+ENTITIES
+  0
+POLYLINE
+ 70
+     1
+  0
+VERTEX
+ 10
+0
+ 20
+0
+  0
+VERTEX
+ 10
+10
+ 20
+0
+  0
+VERTEX
+ 10
+10
+ 20
+-10
+  0
+VERTEX
+ 10
+0
+ 20
+-10
+  0
+SEQEND
+  0
+POLYLINE
+ 70
+     1
+  0
+VERTEX
+ 10
+0
+ 20
+-10
+  0
+VERTEX
+ 10
+0
+ 20
+-1.77636e-15
+  0
+VERTEX
+ 10
+-10
+ 20
+-1.16403e-15
+  0
+VERTEX
+ 10
+-10
+ 20
+-10
+  0
+SEQEND
+  0
+POLYLINE
+ 70
+     1
+  0
+VERTEX
+ 10
+10
+ 20
+0
+  0
+VERTEX
+ 10
+0
+ 20
+0
+  0
+VERTEX
+ 10
+-6.12323e-16
+ 20
+10
+  0
+VERTEX
+ 10
+10
+ 20
+10
+  0
+SEQEND
+  0
+POLYLINE
+ 70
+     1
+  0
+VERTEX
+ 10
+10
+ 20
+0
+  0
+VERTEX
+ 10
+10
+ 20
+-10
+  0
+VERTEX
+ 10
+20
+ 20
+-10
+  0
+VERTEX
+ 10
+20
+ 20
+0
+  0
+SEQEND
+  0
+POLYLINE
+ 70
+     1
+  0
+VERTEX
+ 10
+0
+ 20
+-10
+  0
+VERTEX
+ 10
+10
+ 20
+-10
+  0
+VERTEX
+ 10
+10
+ 20
+-20
+  0
+VERTEX
+ 10
+1.77636e-15
+ 20
+-20
+  0
+SEQEND
+  0
+POLYLINE
+ 70
+     1
+  0
+VERTEX
+ 10
+-10
+ 20
+-10
+  0
+VERTEX
+ 10
+-10
+ 20
+-1.77636e-15
+  0
+VERTEX
+ 10
+-20
+ 20
+6.12323e-16
+  0
+VERTEX
+ 10
+-20
+ 20
+-10
+  0
+SEQEND
+   0
+ENDSEQ
+  0
+EOF

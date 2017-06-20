@@ -432,10 +432,10 @@ bool paperFace::writeToDXF(ofstream* DXFFile, Json::Value & faces_json, VektorR2
   VektorR3 normalVec = calc3DNormal();
   normalVec.Normalize();
 
-  Json::Value normalJson(Json::arrayValue);
-  normalJson.append(normalVec[0]);
-  normalJson.append(normalVec[1]);
-  normalJson.append(normalVec[2]);
+  Json::Value normalJson;
+  normalJson["x"] = normalVec[0];
+  normalJson["y"] = normalVec[1];
+  normalJson["z"] = normalVec[2];
 
   face_json["normal"] = normalJson;
 
@@ -879,10 +879,10 @@ void paperFace::get3DVertices(int start_with_index, Json::Value &vertices_json)
 
     double dist = (pointArray[point[index_save(i)]] - pointArray[point[index_save(i-1)]]).Norm2();
 
-    Json::Value vertex(Json::arrayValue);
-    vertex.append(Json::Value(pointArray[point[index_save(i)]][0]));
-    vertex.append(Json::Value(pointArray[point[index_save(i)]][1]));
-    vertex.append(Json::Value(pointArray[point[index_save(i)]][2]));
+    Json::Value vertex;
+    vertex["x"] = Json::Value(pointArray[point[index_save(i)]][0]);
+    vertex["y"] = Json::Value(pointArray[point[index_save(i)]][1]);
+    vertex["z"] = Json::Value(pointArray[point[index_save(i)]][2]);
     vertices_json.append(vertex);
     
     //cout << "vertex #" << i << ": (" << setprecision(5) << fixed << pointArray[point[index_save(i)]][0] << "," << pointArray[point[index_save(i)]][1] << "," << pointArray[point[index_save(i)]][2] << ")" << " [" << point[index_save(i)] << "]" << " dist to prev.: " << dist << endl;
@@ -1002,6 +1002,10 @@ VektorR3 paperFace::calc3DNormal()
   
   return normal;
 } // calc3DNormal
+
+// TODO: While merging the faces, keep track of the faces that were deleted. 
+// While producing the projection, instead of adding the merged face, add the original faces with their respective UVs.
+//
 
 bool paperFace::mergeFace(paperFace& face)
 {
